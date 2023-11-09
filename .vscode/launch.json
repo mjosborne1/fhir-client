@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Attach",
+            "port": 9229,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "type": "chrome",
+            "name": "http://localhost:5174/",
+            "request": "launch",
+            "url": "http://localhost:5174/"
+        }
+    ]
+}
