@@ -1,22 +1,10 @@
-# create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Overview of Project
+Sveltekit MVP of an eOrdering system based on AU Core IG and eRequesting specs for validation of eRequesting candidate Implementation Guides at Connectathons.
+It's a work in progress - happy for others to contribute.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've cloned this project  install dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
@@ -33,6 +21,4 @@ To create a production version of your app:
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Log any improvements in [Issues](https://github.com/mjosborne1/fhir-client/issues)
