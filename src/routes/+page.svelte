@@ -1,7 +1,33 @@
 <script lang="ts">
     export let data;       
     //console.log(data);
-    import { base, assets } from '$app/paths';
+   import { base, assets } from '$app/paths';
+   import type { SearchBoxProps } from '$lib/types/searchbox.js';
+   import SearchBox from '$lib/components/SearchBox.svelte';
+
+   export let testCodeSearchProps: SearchBoxProps = {
+     label:"Test Name",
+     fieldName:"TestSearch",
+     heading:"Select a test name",
+     apiECLQuery: "http://snomed.info/sct?fhir_vs=ecl/%3C%3C%20363679005%20",
+     apiEndpoint: "https://r4.ontoserver.csiro.au/fhir",
+     formId:"srchTestCodeId",
+     preloadBehavior:'hover',
+     loadingState: 'waiting'
+   };
+
+
+   export let bodySiteSearchProps: SearchBoxProps = {
+       label: "Body Site",
+       fieldName: "ServiceRequestBodySite",
+       heading:"Select a body site",
+       apiECLQuery: "http://snomed.info/sct?fhir_vs=ecl/%5E%206021000036108%20",
+       apiEndpoint: "https://r4.ontoserver.csiro.au/fhir",
+       formId:"bodySiteId",
+       preloadBehavior: 'hover',
+       loadingState: 'waiting'
+   };
+   
     function handleSubmit() {
         console.log("Submitted!");
     }
@@ -29,18 +55,19 @@
             {#await data}
             <p>Loading</p>
             {:then data}
-            <div>  
-                <p><code>IHI:</code> {data.patient?.patHeading.ihi}</p>
-                <p><code>Name:</code> {data.patient?.patHeading.name}</p>
-                <p><code>DOB:</code> {data.patient?.patHeading.dob}</p>
-                <p><code>Age:</code> {data.patient?.patHeading.age}</p>
-                <p><code>Sex:</code> {data.patient?.patHeading.sex}</p>
-                <p><code>Address:</code> {@html data.patient?.patHeading.address}</p>
+            <div>                
+                <p><code>IHI:</code> {data.patient.patHeading.ihi}</p>
+                <p><code>Name:</code> {data.patient.patHeading.name}</p>
+                <p><code>DOB:</code> {data.patient.patHeading.dob}</p>
+                <p><code>Age:</code> {data.patient.patHeading.age}</p>
+                <p><code>Sex:</code> {data.patient.patHeading.sex}</p>
+                <p><code>Address:</code> {@html data.patient.patHeading.address}</p>
+
             </div>
             {/await}
         </section>
         <section class="container">
-            <form on:submit|preventDefault={handleSubmit}>
+            <form method="post" on:submit|preventDefault={handleSubmit}>
                 <header>
                     <h2>Create a service request</h2>
                 </header>
@@ -53,14 +80,22 @@
                     {/each}
                 </select>
  
-                <!-- ServiceRequest.code-->                  
-                <label for="serviceCode">Test Name</label>
-                <input type="text" id="serviceCode" name="serviceCode" size="20" placeholder="Test name">   
+                <!-- Add presenting problem-->
 
+                <!-- ServiceRequest.code-->   
+                <SearchBox  searchBoxProps={testCodeSearchProps}></SearchBox>               
+                <div>
+                    <input type="text" name="searchTestCodeId" bind:value={testCodeSearchProps.valueId}/>
+                    <input type="text" name="searchTestCodeDisplay" bind:value={testCodeSearchProps.valueDisplay}/>
+                    
+                </div>
                 <!-- ServiceRequest.bodySite for demo purposes - remove if not radiology -->        
-                <label for="bodySite">Body Site:</label>
-                <input type="text" id="bodySite" name="bodySite" size="20" placeholder="Body site">  
-               
+                <SearchBox searchBoxProps={bodySiteSearchProps}></SearchBox>               
+                <div>
+                    <input type="text" name="selectedBodySiteCode" bind:value={bodySiteSearchProps.valueId}/>
+                    <input type="hidden" name="selectedBodySiteDisplay" bind:value={bodySiteSearchProps.valueDisplay}/>
+                </div>
+            
                 <!-- Free text description of the test-->         
                 <label for="requestFreeText">Notes:</label>
                 <textarea cols="40" rows="3" id="requestFreeText"></textarea>

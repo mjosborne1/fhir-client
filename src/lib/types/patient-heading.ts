@@ -1,7 +1,7 @@
 export interface PatientHeading {
     id: string | number;
-    ihi: string | null | undefined;
-    name: string | null | undefined;
+    ihi: string | null;
+    name: string | null;
     dob: string | null;
     address: string | null;
     sex: string | null;

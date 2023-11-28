@@ -1,5 +1,5 @@
-import type { Patient, ValueSet } from 'fhir/r4';
-import type { PatientHeading } from './patient-heading'
+import type { Patient } from 'fhir/r4';
+import type { PatientHeading } from '../types/patient-heading'
 
 
 function getUsualName(patient:Patient) {
@@ -105,7 +105,7 @@ function getUsualName(patient:Patient) {
 export function mapPatientToPatientHeading(patient:Patient):PatientHeading {
     return {
         id: patient.id ?? 0,
-        ihi: getIHI(patient),
+        ihi: getIHI(patient) ?? "",
         name: getUsualName(patient),
         dob: getDOB(patient),
         address: getPatientAddress(patient),
