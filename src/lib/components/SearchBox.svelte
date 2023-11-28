@@ -48,6 +48,7 @@
 		console.log(value.id+","+value.display);
 		searchBoxProps.valueId = value.id ?? '';
 		searchBoxProps.valueDisplay = value.display ?? '';
+		data  = {concepts:[],total:0}; 
 	}
 
 	/* Work-around for Typescript bug on:search in input */
