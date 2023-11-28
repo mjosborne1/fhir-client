@@ -8,6 +8,8 @@
    export let testCodeSearchProps: SearchBoxProps = {
      label:"Test Name",
      fieldName:"TestSearch",
+     formValueId: "testCodeValueId",
+     formDisplayId: "testCodeDisplayId",
      heading:"Select a test name",
      apiECLQuery: "http://snomed.info/sct?fhir_vs=ecl/%3C%3C%20363679005%20",
      apiEndpoint: "https://r4.ontoserver.csiro.au/fhir",
@@ -20,6 +22,8 @@
    export let bodySiteSearchProps: SearchBoxProps = {
        label: "Body Site",
        fieldName: "ServiceRequestBodySite",
+       formValueId: "bodySiteValueId",
+       formDisplayId: "bodySiteDisplayId",
        heading:"Select a body site",
        apiECLQuery: "http://snomed.info/sct?fhir_vs=ecl/%5E%206021000036108%20",
        apiEndpoint: "https://r4.ontoserver.csiro.au/fhir",
@@ -83,19 +87,11 @@
                 <!-- Add presenting problem-->
 
                 <!-- ServiceRequest.code-->   
-                <SearchBox  searchBoxProps={testCodeSearchProps}></SearchBox>               
-                <div>
-                    <input type="text" name="searchTestCodeId" bind:value={testCodeSearchProps.valueId}/>
-                    <input type="text" name="searchTestCodeDisplay" bind:value={testCodeSearchProps.valueDisplay}/>
-                    
-                </div>
+                <SearchBox  searchBoxProps={testCodeSearchProps}></SearchBox>    
+               
                 <!-- ServiceRequest.bodySite for demo purposes - remove if not radiology -->        
                 <SearchBox searchBoxProps={bodySiteSearchProps}></SearchBox>               
-                <div>
-                    <input type="text" name="selectedBodySiteCode" bind:value={bodySiteSearchProps.valueId}/>
-                    <input type="hidden" name="selectedBodySiteDisplay" bind:value={bodySiteSearchProps.valueDisplay}/>
-                </div>
-            
+               
                 <!-- Free text description of the test-->         
                 <label for="requestFreeText">Notes:</label>
                 <textarea cols="40" rows="3" id="requestFreeText"></textarea>

@@ -2,6 +2,8 @@ export interface SearchBoxProps {
     label?:string;
 	heading?:string;
 	formId?:string;
+	formValueId?:string;
+	formDisplayId?:string;
 	fieldName?:string;
 	valueId?: string;
 	valueDisplay?: string;
