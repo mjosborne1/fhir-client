@@ -1,5 +1,6 @@
 import type { Patient } from 'fhir/r4';
 import type { PatientHeading } from '../types/patient-heading'
+import { getAddress, getPhoneNo, getEmail } from './api-common';
 
 
 function getUsualName(patient:Patient) {
@@ -46,34 +47,7 @@ function getUsualName(patient:Patient) {
   }
   
   function getPatientAddress(patient:Patient) {
-    if (!patient || !patient.address) {
-      return null;
-    }
-  
-    const address = patient.address[0]; // Get first address
-  
-    // Build address string
-    let patientAddress = '';
-    if (address.line) {
-      patientAddress += address.line.join(' ');
-    }
-    if (address.city) {
-      if (patientAddress) patientAddress += ', ';
-      patientAddress += address.city; 
-    }
-    if (address.state) {
-      if (patientAddress) patientAddress += ', ';
-      patientAddress += address.state;
-    }
-    if (address.postalCode) {
-      if (patientAddress) patientAddress += ' ';
-      patientAddress += address.postalCode;
-    }
-    if (address.country) {
-      if (patientAddress) patientAddress += ', ';
-      patientAddress += address.country;
-    }
-  
+    const patientAddress = getAddress(patient);  
     return patientAddress;  
   }
 
@@ -110,7 +84,9 @@ export function mapPatientToPatientHeading(patient:Patient):PatientHeading {
         dob: getDOB(patient),
         address: getPatientAddress(patient),
         sex: patient.gender ?? "Unknown",
-        age: getPatientAge(patient) ?? "Unknown"
+        age: getPatientAge(patient) ?? "Unknown",
+        phone: getPhoneNo(patient) ?? "",
+        email: getEmail(patient) ?? ""
     }
 }
 

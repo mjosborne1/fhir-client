@@ -1,11 +1,9 @@
-export interface PatientHeading {
+export interface OrganizationHeading {
     id: string | number;
-    ihi: string | null;
+    hpio: string | null;
     name: string | null;
-    dob: string | null;
+    type: string | null;
     address: string | null;
-    sex: string | null;
-    age: string | null;
     phone: string | null;
     email: string | null;
 }

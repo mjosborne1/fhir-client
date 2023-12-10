@@ -1,5 +1,4 @@
 import type { ValueSet, OperationOutcome,ValueSetComposeIncludeConceptDesignation } from "fhir/r4";
-import type { ServiceType } from "$lib/types/service-type";
 import type { Concept, ConceptSearchResult } from "$lib/types/concept-type";
 export const SCT_URI = "http://snomed.info/sct";
 export const FULLY_SPECIFIED_NAME_ID = "900000000000003001";

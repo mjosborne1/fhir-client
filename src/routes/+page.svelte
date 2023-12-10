@@ -1,8 +1,10 @@
 <script lang="ts">
+    import type { ActionData } from './$types.js';
+    import type { SearchBoxProps } from '$lib/types/searchbox.js';
     export let data;       
+    export let form:ActionData;
     //console.log(data);
-   import { base, assets } from '$app/paths';
-   import type { SearchBoxProps } from '$lib/types/searchbox.js';
+   import { base, assets } from '$app/paths';   
    import SearchBox from '$lib/components/SearchBox.svelte';
 
    export let testCodeSearchProps: SearchBoxProps = {
@@ -32,10 +34,9 @@
        loadingState: 'waiting'
    };
    
-    function handleSubmit() {
-        console.log("Submitted!");
+    function handleSubmit() {       
     }
-    let selectedServiceType:string;
+    let selectedConcept:string;
 
 </script>
 <main class="container-fluid">   
@@ -55,18 +56,30 @@
        <article>
         <section class="container">
 
-            <h2>Test patient: </h2>     
+            <h2>Patient: </h2>     
             {#await data}
             <p>Loading</p>
             {:then data}
             <div>                
-                <p><code>IHI:</code> {data.patient.patHeading.ihi}</p>
-                <p><code>Name:</code> {data.patient.patHeading.name}</p>
-                <p><code>DOB:</code> {data.patient.patHeading.dob}</p>
-                <p><code>Age:</code> {data.patient.patHeading.age}</p>
-                <p><code>Sex:</code> {data.patient.patHeading.sex}</p>
-                <p><code>Address:</code> {@html data.patient.patHeading.address}</p>
+                <p><code>IHI:</code> {data.patient.heading.ihi}</p>
+                <p><code>Name:</code> {data.patient.heading.name}
+                <code>DOB:</code> {data.patient.heading.dob}
+                <code>Age:</code> {data.patient.heading.age}</p>
+                <p><code>Sex:</code> {data.patient.heading.sex}
+                <code>Address:</code> {@html data.patient.heading.address}</p>
 
+            </div>
+            <h2>Practitioner</h2>
+            <div>                
+                <h4>Identifiers:</h4>
+                <p><code>HPI-I</code> {data.practitioner.heading.hpii} 
+                   <code>Provider No</code> {data.practitioner.heading.provno} 
+                   <code>Prescriber No</code> {data.practitioner.heading.prescno} </p>
+                <h4>Details:</h4>
+                <p><code>Organisation:</code> {data.organization.heading.name} </p>
+                <p><code>Name:</code> {data.practitioner.heading.name}
+                <code>Email:</code> {data.practitioner.heading.email}
+                <code>Phone:</code> {data.practitioner.heading.phone}</p>
             </div>
             {/await}
         </section>
@@ -77,10 +90,10 @@
                 </header>
 
                 <!-- Service Category-->
-                <label for="serviceType">Service Category</label>
-                <select id="serviceType" bind:value={selectedServiceType}>
-                    {#each data.categories as serviceType}
-                    <option value={serviceType.code}>{serviceType.display}</option>
+                <label for="Concept">Service Category</label>
+                <select id="Concept" bind:value={selectedConcept}>
+                    {#each data.categories as Concept}
+                    <option value={Concept.id}>{Concept.display}</option>
                     {/each}
                 </select>
  
@@ -97,6 +110,9 @@
                 <textarea cols="40" rows="3" id="requestFreeText"></textarea>
                 <button type="submit">Create</button>
             </form>
+            {#if form?.status === "success"}
+               <p>Submit was successfull!</p>
+            {/if}
         </section>
 
         </article>

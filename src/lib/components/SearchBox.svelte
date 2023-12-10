@@ -54,18 +54,7 @@
 
 	/* Work-around for Typescript bug on:search in input */
 	const notypecheck = (x: any) => x;
-	/* const searchProducts: Product[] = data.products.map((product: Product) => ({
-		...product,
-		searchTerms: `${product.title} ${product.description} ${product.brand} ${product.category}`
-	}));
 
-	const searchStore = createSearchStore(searchProducts);
-
-	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
-
-	onDestroy(() => {
-		unsubscribe();
-	}); */
 </script>
 <div class="container">
 	<label for={searchBoxProps.formId}>{searchBoxProps.label}</label> 
