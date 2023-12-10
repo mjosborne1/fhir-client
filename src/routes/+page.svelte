@@ -3,9 +3,28 @@
     import type { SearchBoxProps } from '$lib/types/searchbox.js';
     export let data;       
     export let form:ActionData;
-    //console.log(data);
-   import { base, assets } from '$app/paths';   
+    let selectedConcept:string;
+
+    // Sveltekit packages
+   import { base, assets } from '$app/paths';
+   import { enhance } from '$app/forms';   
+
+   //Components
    import SearchBox from '$lib/components/SearchBox.svelte';
+   import Modal from '$lib/components/Modal.svelte'
+
+   export let presentingProblemSearchProps: SearchBoxProps = {
+     label: "Presenting Problem",
+     fieldName: "PresentingProblem",
+     formValueId: "presentingProblemValueId",
+     formDisplayId: "presentingProblemDisplayId",
+     heading: "Select a presenting problem or condition",
+     apiECLQuery: "http://snomed.info/sct?fhir_vs=ecl/%5E%2032570581000036105%20",
+     apiEndpoint: "https://r4.ontoserver.csiro.au/fhir",
+     formId: "srchPresentingProblemId",
+     preloadBehavior: "hover",
+     loadingState: "waiting"
+   };
 
    export let testCodeSearchProps: SearchBoxProps = {
      label:"Test Name",
@@ -36,7 +55,7 @@
    
     function handleSubmit() {       
     }
-    let selectedConcept:string;
+
 
 </script>
 <main class="container-fluid">   
@@ -84,7 +103,7 @@
             {/await}
         </section>
         <section class="container">
-            <form method="post" on:submit|preventDefault={handleSubmit}>
+            <form method="post">
                 <header>
                     <h2>Create a service request</h2>
                 </header>
@@ -98,6 +117,7 @@
                 </select>
  
                 <!-- Add presenting problem-->
+                <SearchBox  searchBoxProps={presentingProblemSearchProps}></SearchBox>    
 
                 <!-- ServiceRequest.code-->   
                 <SearchBox  searchBoxProps={testCodeSearchProps}></SearchBox>    
@@ -110,8 +130,10 @@
                 <textarea cols="40" rows="3" id="requestFreeText"></textarea>
                 <button type="submit">Create</button>
             </form>
-            {#if form?.status === "success"}
-               <p>Submit was successfull!</p>
+            {#if form?.status === "success"}                           
+                <Modal showModal={true}>
+                    <h4><ins>Service Request Submitted!</ins></h4>
+                </Modal>            
             {/if}
         </section>
 
