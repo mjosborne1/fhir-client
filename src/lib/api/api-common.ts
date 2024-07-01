@@ -26,8 +26,12 @@ export function getAddress(resident:Patient | Organization | Patient) {
       residentAddress += address.postalCode;
     }
     if (address.country) {
+      let countryName = "Australia"
+      if (address.country !== "AU") {
+        countryName = "Not From Here"
+      }
       if (residentAddress) residentAddress += ', ';
-      residentAddress += address.country;
+      residentAddress += countryName;
     }
   
     return residentAddress;  

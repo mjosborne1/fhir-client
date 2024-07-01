@@ -9,10 +9,12 @@
     import type { URLSearchParams } from 'url';
     import type { Concept, ConceptSearchResult } from '$lib/types/concept-type';
  // import { validateHeaderValue } from 'http';
+    import Badge from '$lib/components/Badge.svelte';
 
 	export let searchBoxProps : SearchBoxProps;
 	export let data:ConceptSearchResult = {concepts:[],total:0}; 
-//	export let data:ConceptSearchResult; 
+    let selected:Concept[] = [];
+
     
 	let timer: NodeJS.Timeout;
 	let searchTerm = '';
@@ -45,11 +47,24 @@
 		searchBoxProps.loadingState = 'loaded';	
 	}
 
+	function addSelected(value:Concept) {
+		selected.push(value);
+		selected = selected;
+	}
+
+	function handleBadgeClose(event: MouseEvent,  value:Concept) {
+        selected = selected.filter(i => i.id !== value.id);
+		console.log('Badge closed', event)
+	} 
+
 	function handleSelection(value:Concept) {
 		console.log(value.id+","+value.display);
 		searchBoxProps.valueId = value.id ?? '';
 		searchBoxProps.valueDisplay = value.display ?? '';
 		data  = {concepts:[{id: value.id, display: value.display}],total:1}; 
+		addSelected(value);
+		data = {concepts:[]};
+		searchTerm = '';
 	}
 
 	/* Work-around for Typescript bug on:search in input */
@@ -81,6 +96,13 @@
 				 {/each}
 			</table>				
 		</div>  
+		<div class="container">
+			{#if selected && selected.length > 0} 
+				{#each selected as value}
+					<Badge labelText={value.display} onClose={(event) => handleBadgeClose(event, value)}></Badge>				
+				{/each}				
+			{/if}
+		</div>
 		{/if}
 	</div>
 	<input type="hidden" id={searchBoxProps.formValueId}  name={searchBoxProps.formValueId} value={searchBoxProps.valueId}>

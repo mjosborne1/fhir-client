@@ -1,3 +1,5 @@
+
+import type { Concept } from "$lib/types/concept-type";
 export interface SearchBoxProps {
     label?:string;
 	heading?:string;
@@ -12,4 +14,5 @@ export interface SearchBoxProps {
 	apiECLQuery:string;
     preloadBehavior: 'tap' | 'hover';
 	loadingState: 'waiting' | 'loading' | 'loaded' | 'error';
+	selected?: Concept[];
 }

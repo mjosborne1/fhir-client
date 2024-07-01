@@ -4,13 +4,13 @@ import type { Bundle } from "fhir/r4";
 export const categories : Concept[] =
     [
       {
-        id: "310074003", display: "Pathology" 
+        id: "108252007", display: "Pathology" 
       },
       {
-        id: "310125001", display: "Radiology"
+        id: "363679005", display: "Imaging"
       },
       {
-        id: "1231393002", display: "Spirometry"
+        id: "1231393002", display: "Lung function testing"
       }
     ];
 

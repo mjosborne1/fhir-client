@@ -3,6 +3,7 @@ export interface Concept {
     id: string;
     display?: string;
     semanticTag?: string;
+    text?: string;
   }
   
   export interface ConceptSearchResult {

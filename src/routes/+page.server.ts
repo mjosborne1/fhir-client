@@ -5,11 +5,11 @@ export const prerender = false;
 
 
 export function load({ params }) {	  
-  let id:string = '18838';
+  let patid:string = '18838';
   let docid:string = 'bobrester-bob';
   let orgid:string = '16057';
   return {    
-    patient: api.getPatientHeading(id),
+    patient: api.getPatientHeading(patid),
     practitioner: api.getPractitionerHeading(docid),
     organization: api.getOrganizationHeading(orgid),
     categories: api.getCategories()    
