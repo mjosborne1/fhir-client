@@ -43,7 +43,7 @@
 			const target = e.target as HTMLInputElement;
 			searchTerm = target.value;
 			fetchData(searchTerm);
-		}, 300);
+		}, 250);
 		searchBoxProps.loadingState = 'loaded';	
 	}
 
@@ -96,13 +96,14 @@
 				 {/each}
 			</table>				
 		</div>  
-		<div class="container">
+		<section>
 			{#if selected && selected.length > 0} 
 				{#each selected as value}
-					<Badge labelText={value.display} onClose={(event) => handleBadgeClose(event, value)}></Badge>				
+					<Badge labelText={value.display} onClose={(event) => handleBadgeClose(event, value)}></Badge>
+					&nbsp;
 				{/each}				
 			{/if}
-		</div>
+		</section>
 		{/if}
 	</div>
 	<input type="hidden" id={searchBoxProps.formValueId}  name={searchBoxProps.formValueId} value={searchBoxProps.valueId}>
@@ -111,9 +112,14 @@
 </div>
 <style>
 
-.terms-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	grid-gap: 1rem;
-}
+	.terms-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-gap: 1rem;
+	}
+	.spacer {
+		display: flex;
+		margin-left: 2em;
+	}
+
 </style>

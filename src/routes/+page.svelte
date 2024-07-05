@@ -102,50 +102,56 @@
             {#await data}
                 <p>Loading</p>
             {:then data}
-                <section>
-                    <h3>Patient: </h3>     
-                    {#if data.patient.heading.ihi}
-                        <p><code>IHI:</code> {data.patient.heading.ihi}</p>                    
-                    {/if}                
-                    <p><code>Name:</code> {data.patient.heading.name}
-                    <code>DOB:</code> {data.patient.heading.dob}
-                    <code>Age:</code> {data.patient.heading.age}
-                    </p>
-                    <p><code>Sex:</code> {data.patient.heading.sex}
-                    <code>Address:</code> {@html data.patient.heading.address}</p>
-                </section>
-                <section>
-                    <h3>Practitioner</h3>
-                    <div>                
-                        <p>
-                        {#if data.practitioner.heading.hpii}
-                            <code>HPI-I</code> {data.practitioner.heading.hpii} 
-                        {/if}
-                        {#if data.practitioner.heading.provno}
-                          <code>Provider No</code> {data.practitioner.heading.provno} 
-                        {/if}
-                        {#if data.practitioner.heading.prescno}
-                          <code>Prescriber No</code> {data.practitioner.heading.prescno} 
-                        {/if}
-                       </p>
-                        
-                        {#if data.organization.heading.name}
-                        <p><code>Organisation:</code> {data.organization.heading.name} </p>
-                        {/if}
-                        <p>
-                        {#if data.practitioner.heading.name}
-                            <code>Name:</code> {data.practitioner.heading.name}
-                        {/if}
-                        {#if data.practitioner.heading.email}
-                            <code>Email:</code> {data.practitioner.heading.email}
-                        {/if}
-                        {#if data.practitioner.heading.phone}
-                             <code>Phone:</code> {data.practitioner.heading.phone}
-                        {/if}
-                    
-                    </p>
-                    </div>
-                 </section>
+                <div class="grid">
+                    <div>
+                        <section>
+                            <h3>Patient: </h3>     
+                            {#if data.patient.heading.ihi}
+                            <p><code>IHI:</code> {data.patient.heading.ihi}</p>                    
+                            {/if}                
+                            <p><code>Name:</code> {data.patient.heading.name}
+                                <code>DOB:</code> {data.patient.heading.dob}
+                                <code>Age:</code> {data.patient.heading.age}
+                            </p>
+                            <p><code>Sex:</code> {data.patient.heading.sex}
+                                <code>Address:</code> {@html data.patient.heading.address}</p>
+                            </section>
+                        </div>
+                        <div>
+                            <section>
+                                <h3>Practitioner</h3>
+                                <div>                
+                                    <p>
+                                        {#if data.practitioner.heading.hpii}
+                                        <code>HPI-I</code> {data.practitioner.heading.hpii} 
+                                        {/if}
+                                        {#if data.practitioner.heading.provno}
+                                        <code>Provider No</code> {data.practitioner.heading.provno} 
+                                        {/if}
+                                        {#if data.practitioner.heading.prescno}
+                                        <code>Prescriber No</code> {data.practitioner.heading.prescno} 
+                                        {/if}
+                                    </p>
+                                    
+                                    {#if data.organization.heading.name}
+                                    <p><code>Organisation:</code> {data.organization.heading.name} </p>
+                                    {/if}
+                                    <p>
+                                        {#if data.practitioner.heading.name}
+                                        <code>Name:</code> {data.practitioner.heading.name}
+                                        {/if}
+                                        {#if data.practitioner.heading.email}
+                                        <code>Email:</code> {data.practitioner.heading.email}
+                                        {/if}
+                                        {#if data.practitioner.heading.phone}
+                                        <code>Phone:</code> {data.practitioner.heading.phone}
+                                        {/if}
+                                        
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                </div>
             {/await}
         <section class="container">
             <form method="post">
@@ -168,9 +174,9 @@
                 <!-- Radiology binding to ServiceRequest.code-->   
                 <SearchBox  searchBoxProps={testCodeSearchPropsRadiology}></SearchBox>    
 
-                <!-- ServiceRequest.bodySite for demo purposes - remove if not radiology -->        
+                <!-- ServiceRequest.bodySite for demo purposes - remove if not radiology  
                 <SearchBox searchBoxProps={bodySiteSearchProps}></SearchBox>  
-
+                -->       
                <!-- Lung function testing --> 
                {:else if selectedConcept === "1231393002"}
                 <!-- Spirometry ServiceRequest.code-->   
@@ -222,3 +228,4 @@
 
         </article>
     </main>
+   
