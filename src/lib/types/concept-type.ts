@@ -10,3 +10,9 @@ export interface Concept {
     concepts: Concept[];
     total?: number;
   }
+
+
+export type ProcedureToBodySitesMap = {
+  [procedureCode: string]: Set<string>;
+};
+

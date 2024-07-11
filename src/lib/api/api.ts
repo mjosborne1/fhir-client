@@ -8,6 +8,7 @@ import { categories, exampleBundle } from './data';
 import { isPatient, mapPatientToPatientHeading } from '$lib/api/api-patient';
 import { isPractitioner, mapPractitionerToPractitionerHeading } from '$lib/api/api-practitioner';
 import { isOrganization, mapOrganizationToOrganizationHeading } from '$lib/api/api-organization';
+import { getConceptMap } from '$lib/api/api-terminology';
 import type { OrganizationHeading } from '$lib/types/organization-heading';
 export const prerender = true;
 
@@ -50,6 +51,10 @@ export default {
   // Return Example code,display pairs for Categories, Pathology, Radiology
   getCategories: () => {    
     return  categories;
+  },
+  getRadiologyProcedureMap: async(conceptMapId:string) => {
+     const procMap = getConceptMap(conceptMapId);
+     return { procMap };
   }, 
   postServiceRequest: async (formData:FormInput) => {
     let requestBundle = createRequestBundle(formData);

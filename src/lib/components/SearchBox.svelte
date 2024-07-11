@@ -53,6 +53,7 @@
 	}
 
 	function handleBadgeClose(event: MouseEvent,  value:Concept) {
+		event.preventDefault(); // Prevent default action
         selected = selected.filter(i => i.id !== value.id);
 		console.log('Badge closed', event)
 	} 
